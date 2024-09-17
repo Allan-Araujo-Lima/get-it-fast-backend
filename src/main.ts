@@ -12,7 +12,7 @@ async function bootstrap() {
 
   app.enableCors({
     origin: configService.get('FRONTEND_URL'),
-    allowedHeaders: ['content-type', 'authorization'],
+    allowedHeaders: "*",
   });
 
   app.useGlobalPipes(
