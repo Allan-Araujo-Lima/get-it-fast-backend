@@ -22,7 +22,10 @@ export class ProfilesDataService {
 
     if (verifiedProfileData)
       throw new ConflictException(
-        'Already exist an profile_data with this email.',
+        {
+          message: "Usuário já cadastrado.",
+          type: "error"
+        }
       );
 
     profile_data.password = bcrypt.hashSync(

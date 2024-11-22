@@ -1,5 +1,4 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import * as dotenv from 'dotenv';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
@@ -12,9 +11,6 @@ async function bootstrap() {
 
   app.enableCors({
     origin: configService.get('FRONTEND_URL'),
-    allowedHeaders: "*",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true,
   });
 
   app.useGlobalPipes(
