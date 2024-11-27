@@ -21,6 +21,9 @@ export class Products {
     description: string;
 
     @Column()
+    price: number;
+
+    @Column()
     amount: number;
 
     @Column()
