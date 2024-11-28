@@ -20,13 +20,13 @@ export class Products {
     @Column()
     description: string;
 
-    @Column()
+    @Column({ type: "decimal", precision: 10, scale: 2 })
     price: number;
 
-    @Column()
+    @Column({ type: "int" })
     amount: number;
 
-    @Column()
+    @Column({ type: "date" })
     expiration: Date;
 
     @ManyToOne(() => ProfilesData, (user) => user.id, { cascade: true, nullable: false })
