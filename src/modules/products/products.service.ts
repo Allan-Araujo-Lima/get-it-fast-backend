@@ -18,7 +18,6 @@ export class ProductsService {
   async create(userId: string, createProductDto: CreateProductDto) {
     const user = await this.profileService.findOneById(userId);
     return this.ProductsRepository.save({ ...createProductDto, user });
-
   }
 
   findAll() {
