@@ -5,12 +5,12 @@ export class CreateProductDto {
     name: string;
     description: string;
     @IsNotEmpty()
-    @IsNumber({ allowInfinity: false, allowNaN: false })
-    @IsPositive()
+    // @IsNumber({ allowInfinity: false, allowNaN: false })
+    // @IsPositive()
     price: number;
     @IsNotEmpty()
-    @IsPositive()
-    @IsInt()
+    // @IsPositive()
+    // @IsInt()
     amount: number;
     @IsDateString()
     expiration: string
