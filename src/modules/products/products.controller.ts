@@ -21,11 +21,11 @@ export class ProductsController {
       },
     }),
     fileFilter: (req, file, callback) => {
-      const allowedMimeTypes = ['image/png', 'image/jpeg'];
+      const allowedMimeTypes = ['image/jpg'];
       if (allowedMimeTypes.includes(file.mimetype)) {
         callback(null, true);
       } else {
-        callback(new BadRequestException('Apenas arquivos PNG e JPG são permitidos!'), false);
+        callback(new BadRequestException('Apenas arquivos JPG são permitidos!'), false);
       }
     }
   }))
