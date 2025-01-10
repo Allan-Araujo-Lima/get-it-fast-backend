@@ -5,8 +5,6 @@ import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './config/database.module';
 import { ProfilesDataModule } from './modules/profiles_data/profiles_data.module';
 import { ProductsModule } from './modules/products/products.module';
-import { ServeStaticModule } from '@nestjs/serve-static';
-import { join } from 'path';
 
 @Module({
   imports: [
@@ -19,10 +17,6 @@ import { join } from 'path';
       }),
     }),
     ProductsModule,
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'uploads'),
-      serveRoot: '/uploads'
-    })
   ],
 })
 export class AppModule { }

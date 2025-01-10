@@ -3,33 +3,13 @@ import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { diskStorage } from 'multer';
-import { extname, join } from 'path';
-import * as fs from 'fs';
 
 @Controller('products')
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) { }
 
   @Post()
-  @UseInterceptors(FileInterceptor('file', {
-    storage: diskStorage({
-      destination: "./uploads",
-      filename: (req, file, callback) => {
-        const tempFileName = `${Date.now()}-${file.originalname}`;
-        callback(null, tempFileName); // Nome temporário
-      },
-    }),
-    fileFilter: (req, file, callback) => {
-      const allowedMimeTypes = ['image/jpg'];
-      if (allowedMimeTypes.includes(file.mimetype)) {
-        callback(null, true);
-      } else {
-        callback(new BadRequestException('Apenas arquivos JPG são permitidos!'), false);
-      }
-    }
-  }))
-
+  @UseInterceptors(FileInterceptor('file'))
   async create(
     @Request() req,
     @Body() createProductDto: CreateProductDto,
@@ -40,9 +20,7 @@ export class ProductsController {
 
     const productId = product.id;
 
-    const oldPath = file.path; // Recolhe o nome temporário do arquivo
-    const newPath = join('./uploads', `${productId}${extname(file.originalname)}`);
-    fs.renameSync(oldPath, newPath); // Atualiza o nome para o ID do produto cadastrado
+    this.productsService.uploadFile(file, productId);
 
     return product;
   }
