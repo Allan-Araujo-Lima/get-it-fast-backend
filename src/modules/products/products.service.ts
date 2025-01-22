@@ -35,15 +35,19 @@ export class ProductsService {
     return this.ProductsRepository.findAndCount();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} product`;
+  findOne(id: string) {
+    return this.ProductsRepository.findOne({ where: { id } });
   }
 
-  update(id: number, updateProductDto: UpdateProductDto) {
+  findByUser(id: string) {
+    return this.ProductsRepository.find({ relations: ['user'], where: { user: { id } } });
+  }
+
+  update(id: string, updateProductDto: UpdateProductDto) {
     return `This action updates a #${id} product`;
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return `This action removes a #${id} product`;
   }
 
