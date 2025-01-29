@@ -30,14 +30,15 @@ export class ProductsController {
     return this.productsService.findAll();
   }
 
+  @Get('user')
+  findByUser(@Request() req) {
+    const userId = req.profile_data?.sub
+    return this.productsService.findByUser(userId);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.productsService.findOne(id);
-  }
-
-  @Get('user/:id')
-  findByUser(@Param('id') id: string) {
-    return this.productsService.findByUser(id);
   }
 
   @Patch(':id')
